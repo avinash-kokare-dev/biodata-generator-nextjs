@@ -34,7 +34,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
   lang = 'en' 
 }) => {
   const [reviews, setReviews] = useState<Testimonial[]>(() => {
-    const saved = localStorage.getItem('eternalbond_user_reviews');
+    const saved = typeof window !== "undefined" && localStorage.getItem('eternalbond_user_reviews');
     const userReviews = saved ? JSON.parse(saved) : [];
     return [...TESTIMONIALS, ...userReviews];
   });

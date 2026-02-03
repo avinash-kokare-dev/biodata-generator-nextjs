@@ -20,10 +20,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('eternalbond_lang') as Language;
+    const savedLang = typeof window !== "undefined" && localStorage.getItem('eternalbond_lang') as Language;
     if (savedLang) setLang(savedLang);
 
-    const savedDraft = localStorage.getItem('eternalbond_draft');
+    const savedDraft = typeof window !== "undefined" && localStorage.getItem('eternalbond_draft');
     if (savedDraft) {
       try {
         setBiodata(JSON.parse(savedDraft));
@@ -35,13 +35,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, []);
 
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && typeof window !== "undefined") {
       localStorage.setItem('eternalbond_lang', lang);
     }
   }, [lang, isLoaded]);
 
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && typeof window !== "undefined") {
       localStorage.setItem('eternalbond_draft', JSON.stringify(biodata));
     }
   }, [biodata, isLoaded]);
