@@ -1,12 +1,9 @@
 
 "use client";
 import React, { useState } from 'react';
-import { useApp } from '../../context/AppContext';
-import { TRANSLATIONS } from '../../translations';
 import { Button } from '../../components/Button';
 
 export default function ContactPage() {
-  const { lang } = useApp();
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [isSent, setIsSent] = useState(false);
 

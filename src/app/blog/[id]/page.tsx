@@ -4,14 +4,17 @@ import { BLOG_POSTS } from '../../../constants';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 3600; // Revalidate every hour
+
 export async function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({
     id: post.id,
   }));
 }
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = BLOG_POSTS.find(p => p.id === params.id);
+export default async function BlogPostPage({params}: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const post = BLOG_POSTS.find(p => p.id === resolvedParams.id);
   if (!post) notFound();
 
   return (

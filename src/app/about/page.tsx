@@ -1,16 +1,10 @@
-
-"use client";
 import React from 'react';
-import { useApp } from '../../context/AppContext';
-import { TRANSLATIONS } from '../../translations';
 import { Button } from '../../components/Button';
 import Link from 'next/link';
 
-export default function AboutPage() {
-  const { lang } = useApp();
-  const t = TRANSLATIONS[lang];
-  const homeT = t.home;
+export const revalidate = 3600; // Revalidate every hour
 
+export default function AboutPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
